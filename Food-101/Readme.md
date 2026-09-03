@@ -40,13 +40,13 @@ Buka `klasifikasi-gambar.ipynb`, jalankan cell dari atas ke bawah (pastikan path
 
 ## 📁 Struktur Direktori
 ```plaintext
-📦 Food-Image-Classification
- ┣ 📂saved_model
+📦 Food-101
+ ┣ 📂saved_model.zip
  ┃ ┗ 📂food_model_v1
  ┃    ┣ 📂assets
  ┃    ┣ 📂variables
  ┃    ┗ 📜saved_model.pb
- ┣ 📂tfjs_model
+ ┣ 📂tfjs_model.zip
  ┃ ┣ 📜model.json
  ┃ ┗ 📜*.bin (weight shards)
  ┣ 📂tflite
@@ -54,7 +54,8 @@ Buka `klasifikasi-gambar.ipynb`, jalankan cell dari atas ke bawah (pastikan path
  ┃ ┗ 📜labels.txt
  ┣ 📜klasifikasi-gambar.ipynb
  ┣ 📜requirements.txt
- ┗ 📜README.md
+ ┗ 📜Readme.md
+📦 .gitattributes
 ```
 
 ---
