@@ -1,0 +1,12 @@
+bibimbap
+donuts
+edamame
+french_fries
+hot_dog
+ice_cream
+miso_soup
+mussels
+pizza
+ramen
+sashimi
+spaghetti_bolognese
