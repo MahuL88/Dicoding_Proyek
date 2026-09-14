@@ -49,6 +49,8 @@ Berbeda dari proyek sentimen youtube, proyek ini memberi label sentimen secara o
 | Negative | 44.214 | 31.6% |
 | Neutral | 30.333 | 21.7% |
 
+<img width="251" height="71" alt="image" src="https://github.com/user-attachments/assets/7d722f80-325c-4d4d-ad8e-eee2833ba6c1" />
+
 Dari segi aplikasi, **Traveloka menerima proporsi ulasan negatif tertinggi** dibanding 2 aplikasi lain, sementara **Tiket.com menerima proporsi ulasan netral & positif terbanyak**.
 
 ---
@@ -67,10 +69,30 @@ Dari segi aplikasi, **Traveloka menerima proporsi ulasan negatif tertinggi** dib
 | **Logistic Regression** | TF-IDF (n-gram 1–3) + hyperparameter tuning Optuna (30 trial) | 96% | 0.95 |
 | **MLP** | TF-IDF + neural network kecil (PyTorch, 30 epoch) | 95% | 0.94 |
 
-Ketiga model menunjukkan performa yang solid (95–97%), dengan **IndoBERT sebagai yang paling akurat**, diikuti Logistic Regression yang selisihnya tipis (~1%), lalu MLP.
+Ketiga model menunjukkan performa yang solid (95–97%), dengan **IndoBERT sebagai yang paling akurat**, diikuti Logistic Regression yang selisihnya tipis (~1%), lalu MLP. terlihat bahwa **MLP menunjukkan indikasi overfitting paling jelas**
 
-**MLP menunjukkan indikasi overfitting paling jelas**
 ---
+## 📊 Visualisasi 
+1. **Wordcloud sentimen negatif**
+<img width="627" height="437" alt="image" src="https://github.com/user-attachments/assets/ae39ebe7-34ce-4bec-b23c-918ff007f0f6" />
+
+Pada gambar, terdapat beberapa kata yang mengandung nuansa negatif, meskipun masih didominasi oleh kata-kata umum pada OTA.
+
+2. **Wordcloud sentimen positif**
+<img width="630" height="447" alt="image" src="https://github.com/user-attachments/assets/b3222b05-18f9-4b9b-87a7-9ebb85e3e691" />
+
+Pada gambar wordcloud ini didominasi kata positive seperti ucapan terimakasih dan indikasi aplikasi yang baik.
+
+3. **Wordcloud sentimen neutral**
+<img width="630" height="433" alt="image" src="https://github.com/user-attachments/assets/a204d0b7-2082-4b1c-a538-8a26ac068b60" />
+
+Pada gambar ini, terdapat campuran kata-kata negatif maupun positive. namun, indikasi netral tersebut dipicu oleh gabungan dari seluruh kalimat yang dilabeli neutral.
+
+4. **Distribusi Sentimen per Travel**
+<img width="866" height="417" alt="image" src="https://github.com/user-attachments/assets/aede22f7-c382-4753-bbd2-d76fcd4f8ec9" />
+
+Pada gambar, berdasarkan pelabelan lexicon, terlihat bahwa semua ulasan positif mendominasi di setiap travel serta jumlah ulasan positive terbanyak didapatkan oleh Tiket.com dan ulasan negative terbanyak didapatkan oleh Traveloka.
+
 
 ## ✅ Kesimpulan
 
