@@ -1,6 +1,6 @@
 # 💬 Sentiment Analysis — Komentar YouTube Game
 
-Proyek _Natural Language Processing_ untuk mengklasifikasikan sentimen komentar YouTube (Bahasa Indonesia) terhadap beberapa game — **Mobile Legends: Bang-Bang**, **The Classrooms**, dan **I Am Fish** — ke dalam 3 kelas: **negative**, **neutral**, **positive**. 
+Proyek _Natural Language Processing_ untuk mengklasifikasikan sentimen komentar YouTube (Bahasa Indonesia) terhadap beberapa game, seperti **Mobile Legends: Bang-Bang**, **The Classrooms**, dan **I Am Fish** ke dalam 3 kelas: **negative**, **neutral**, **positive**. 
 
 **Stack:** `Python`, `Transformers` (HuggingFace), `PyTorch`, `scikit-learn`, `Optuna`, `Sastrawi` & `NLTK` (NLP Bahasa Indonesia).
 
@@ -22,16 +22,15 @@ Ulasan diambil dari Youtube untuk 3 jenis video:
 
 | | |
 |---|---|
-| 🎯 Task | Klasifikasi sentimen 3 kelas (negative/neutral/positive) |
+| 🎯 Task     | Klasifikasi sentimen 3 kelas (negative/neutral/positive) |
 | 📊 Dataset | 11.017 komentar YouTube |
-| 🏆 Model Terbaik | **IndoBERT** (`xlm-roberta-base`, fine-tuned) |
-| 🥈 Pembanding | Logistic Regression (TF-IDF + Optuna tuning), MLP (TF-IDF + oversampling) |
+| 🧠 Model    | **IndoBERT** (`xlm-roberta-base`, fine-tuned), Logistic Regression (TF-IDF + Optuna tuning), MLP (TF-IDF + oversampling) |
 
 ---
 
 ## 🧹 Alur Preprocessing Teks
 
-Sebelum digunakan untuk analisis sentimen, teks komentar melalui proses cleaning dan normalisasi. Teks komentar mentah diproses melalui beberapa tahap sebelum dipakai untuk pelabelan/training:
+Sebelum digunakan untuk analisis sentimen, teks komentar mentah diproses melalui beberapa tahap sebelum dipakai untuk pelabelan/training:
 
 ```text
 text
@@ -67,7 +66,7 @@ Karena menggunakan model berbasis Transformer, preprocessing dipertahankan sampa
 
 > ⚠️ **Penting:** Kolom yang digunakan sebagai input model adalah **`text_title`**, bukan `text_akhir`. 
 
-Implementasi preprocessing tersebut digunakan kembali pada notebook inference melalui fungsi:
+Implementasi preprocessing tersebut  dapat digunakan kembali pada inference maupun pengembangan model melalui fungsi:
 
 ```python
 cleaningText()
@@ -75,7 +74,9 @@ casefoldingText()
 fix_slangwords()
 TitleGame()
 ```
-Yang terdapat pada notebook pelabelan 
+Fungsi tersebut dapat ditemukan  pada notebook pelabelan 
+
+--- 
 
 Pada tahap inference, input harus berada dalam format hasil preprocessing, yaitu text_title. Pengguna dapat memilih untuk menjalankan kembali fungsi preprocessing yang tersedia pada notebook pelabelan, atau langsung menggunakan teks yang sebelumnya telah melalui preprocessing.
 
@@ -86,17 +87,14 @@ Sebagai contoh, teks yang telah dinormalisasi seperti “yapping” → “ngoce
 ## 📁 Struktur Direktori
 ```plaintext
 📦 Sentiment-Analysis-YouTube-Comments
- ┣ 📂saved_model
- ┃ ┗ 📂saved_model/1        (TensorFlow SavedModel IndoBERT)
- ┣ 📂tfjs_model
- ┃ ┣ 📜model.json
- ┃ ┗ 📜*.bin (weight shards)
- ┣ 📂tflite
- ┃ ┣ 📜indobert_sentiment.tflite
- ┃ ┗ 📜labels.txt
- ┣ 📂indobert_sentiment_pt   (checkpoint PyTorch native)
- ┣ 📜sentimen-analisis.ipynb
- ┣ 📜requirements.txt
+ ┣ 📂indobert_sentiment_pt
+ ┃ ┣ 📜config.json
+ ┃ ┣ 📜model.safetensors
+ ┃ ┣ 📜tokenizer.json
+ ┃ ┗ 📜tokenizer_config.json
+ ┣ 📂Label_komentar_youtube.csv
+ ┣ 📜pelabelan.ipynb
+ ┣ 📜proyek-sentiment-analysis-on-youtube.ipynb
  ┗ 📜README.md
 ```
 
@@ -128,7 +126,7 @@ Berdasarkan kategori game, semua game didominasi oleh sentiment neutral yaitu 77
 
 2. Kombinasi **Focal Loss + class weight** membantu model dalam menangani ketidakseimbangan kelas, khususnya ketika jumlah data pada kelas `negative` jauh lebih sedikit dibandingkan kelas `neutral`. Pendekatan ini membantu memberikan perhatian yang lebih besar terhadap kelas minoritas selama proses pembelajaran.
 
-3. **Preprocessing komentar YouTube memiliki keterbatasan karena karakteristik data yang sangat beragam dan tidak terstruktur.** Komentar masih mengandung *typo*, slang, singkatan, istilah baru, kata bahasa asing yang diadaptasi ke penulisan Indonesia seperti *“real” → “ril”* dan *“my” → “mai”*, serta penggunaan berbagai bahasa dalam satu komentar seperti bahasa Indonesia, Inggris, Portugis/Brazil, dan Mandarin. Selain itu, terdapat komentar yang hanya berupa *emoticon*, simbol, atau kombinasi kata yang sulit dinormalisasi. Kondisi tersebut menyebabkan data teks belum dapat dibersihkan secara sempurna meskipun telah melalui tahapan preprocessing.
+3. **Preprocessing komentar YouTube memiliki keterbatasan karena karakteristik data yang sangat beragam dan tidak terstruktur.** Komentar masih mengandung *typo*, slang, singkatan, istilah baru, kata bahasa asing yang diadaptasi ke penulisan Indonesia seperti *“real” → “ril”* dan *“my” → “mai”*, serta penggunaan berbagai bahasa dalam satu komentar seperti bahasa Indonesia, Inggris, Portugis/Brazil, dan Mandarin. Selain itu, terdapat komentar yang hanya berupa *emoticon*, simbol, atau kombinasi kata yang sulit dinormalisasi. Kondisi tersebut menyebabkan data teks belum dapat dibersihkan secara sempurna di setiap komentar meskipun telah melalui tahapan preprocessing.
 
 4. **Kualitas pelabelan sentimen juga masih menjadi keterbatasan penelitian.** Variasi bahasa, *typo*, slang, istilah baru, komentar yang sangat singkat, serta penggunaan bahasa campuran dapat menyebabkan model pelabelan kesulitan memahami maksud sebenarnya dari komentar. Dengan demikian, masih terdapat kemungkinan kesalahan pada label yang dihasilkan dan kondisi tersebut dapat turut memengaruhi hasil klasifikasi sentimen.
 
