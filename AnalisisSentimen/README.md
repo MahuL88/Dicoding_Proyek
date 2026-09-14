@@ -37,4 +37,6 @@ Kedua proyek ini dibuat untuk menerapkan proses **end-to-end sentiment analysis*
 
 Selain membandingkan hasil analisis, repository ini juga menunjukkan bahwa **karakteristik sumber data memengaruhi strategi pelabelan dan preprocessing** yang digunakan dalam pemrosesan teks.
 
+Untuk inferensi dan pengembangan, saya menyarankan menggunakan analisis sentimen pada youtube.
+
 ---
